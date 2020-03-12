@@ -20,6 +20,7 @@
             InitializeComponent();
             networkService = new NetworkService();
             apiService = new ApiService();
+            Rates = new List<Rate>();
             dialogService = new DialogService();
             LoadRates();
         }
@@ -78,7 +79,7 @@
 
         private void LoadLocalRates()
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Não está implementado");
         }
 
         private async Task LoadApiRates()
