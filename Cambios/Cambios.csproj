@@ -78,6 +78,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicos\ApiService.cs" />
+    <Compile Include="Servicos\DataService.cs" />
     <Compile Include="Servicos\DialogService.cs" />
     <Compile Include="Servicos\NetworkService.cs" />
     <EmbeddedResource Include="Form1.resx">

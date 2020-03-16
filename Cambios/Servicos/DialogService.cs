@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Cambios.Servicos
+﻿namespace Cambios.Servicos
 {
+    using System.Windows.Forms;
+
     public class DialogService
     {
         public void ShowMessage(string title, string message)

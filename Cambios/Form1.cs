@@ -14,14 +14,15 @@
         private ApiService apiService;
         private List<Rate> Rates;
         private DialogService dialogService;
+        private DataService dataService;
 
         public Form1()
         {
             InitializeComponent();
             networkService = new NetworkService();
             apiService = new ApiService();
-            Rates = new List<Rate>();
             dialogService = new DialogService();
+            dataService = new DataService();
             LoadRates();
         }
 
@@ -50,6 +51,8 @@
                     "e não foram previamente carregadas taxas." + Environment.NewLine +
                     "Tente mais tarde!";
 
+                lblStatus.Text = "Primeira inicialização deverá ter ligação à internet";
+
                 return;
             }
 
@@ -77,11 +80,13 @@
             btnTroca.Enabled = true;
         }
 
+        //Carregar lista a partir da base de dados
         private void LoadLocalRates()
         {
-            MessageBox.Show("Não está implementado");
+            Rates = dataService.GetData();
         }
 
+        //Carregar lista a partir da api e atualizar os dados na base de dados
         private async Task LoadApiRates()
         {
             progressBar1.Value = 0;
@@ -89,6 +94,9 @@
             var response = await apiService.GetRates("https://cambiosrafa.azurewebsites.net", "/api/rates");//Ligar e carregar dados da api
 
             Rates = (List<Rate>)response.Result;
+
+            dataService.DeleteData();
+            dataService.SaveData(Rates);
         }
 
         private void btnConverter_Click(object sender, EventArgs e)
@@ -96,6 +104,7 @@
             Converter();
         }
 
+        //Validações + conversão de moedas
         private void Converter()
         {
             if (string.IsNullOrEmpty(txtValor.Text))
